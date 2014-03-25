@@ -5,7 +5,6 @@ META.json
 README.md
 bin/prt
 cpanfile
-cpanfile.snapshot
 lib/App/PRT.pm
 lib/App/PRT/CLI.pm
 lib/App/PRT/Collector/Files.pm
