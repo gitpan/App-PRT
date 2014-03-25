@@ -1,8 +1,9 @@
 package App::PRT;
 use strict;
 use warnings;
+use 5.010001;
 
-our $VERSION = "0.03";
+our $VERSION = "0.04";
 
 sub welcome {
     'welcome!!!!';
@@ -24,27 +25,13 @@ App::PRT - Command line Perl Refacoring Tool
     $cli->parse(@ARGV);
     $cli->run;
 
-
 =head1 DESCRIPTION
 
 App::PRT is command line tools for Refactoring Perl.
 
-=head1 Usage
+=head1 SEE ALSO
 
-Replace C<foo> token with C<bar>.
-
-    prt replace_tokens foo bar lib/**/**.pm
-
-
-Rename C<Foo> class to C<Bar> class.
-
-    prt rename_class   Foo Bar lib/**/**.pm
-
-
-Delete C<eat> method from C<Food> class.
-
-    prt delete_method Food eat lib/**/**.pm
-
+L<prt>
 
 =head1 LICENSE
 

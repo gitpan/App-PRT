@@ -28,5 +28,7 @@ t/data/hello_world/hello_world.pl
 t/data/inherit/inherit.pl
 t/test.pm
 t/test.t
+xt/perlcritic.t
+xt/perlcriticrc
 META.yml
 MANIFEST
