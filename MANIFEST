@@ -24,6 +24,7 @@ t/data/dinner/dinner.pl
 t/data/dinner/lib/My/Food.pm
 t/data/dinner/lib/My/Human.pm
 t/data/dinner/t/001-my-food._t
+t/data/dinner/t/My-Food._t
 t/data/hello_world/hello_world.pl
 t/data/inherit/inherit.pl
 t/test.pm

@@ -1,5 +1,9 @@
 Revision history for Perl extension App-PRT
 
+0.05 2014-03-28T07:12:05Z
+
+    - Improve renaming behavior
+
 0.04 2014-03-25T04:46:18Z
 
     - Various fixes by moznion

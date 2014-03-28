@@ -206,18 +206,20 @@ sub _try_rename_tokens {
 sub _destination_file {
     my ($self, $file) = @_;
 
-    my @source_dirs = split '::', $self->source_class_name;
-    pop @source_dirs;
+    my @delimiters = do {
+        my $pattern = $self->source_class_name =~ s{::}{(.+)}gr;
+        ($file =~ qr/^(.*)$pattern(.*)$/);
+    };
+    my $prefix = shift @delimiters;
+    my $suffix = pop @delimiters;
 
-    my @destination_dirs = split '::', $self->destination_class_name;
-    my ($destination_basename) = pop @destination_dirs;
-
+    my $fallback_delimiter = $delimiters[-1];
     my $dir = file($file)->dir;
-
-    $dir = $dir->parent for @source_dirs;
-
-    $dir = $dir->subdir(@destination_dirs);
-    $dir->file("$destination_basename.pm").q();
+    $dir = $dir->parent for grep { $_ eq '/' } @delimiters;
+    my $basename = $self->destination_class_name =~ s{::}{
+        shift @delimiters // $fallback_delimiter;
+    }gre;
+    $dir->file("$basename$suffix");
 }
 
 1;
