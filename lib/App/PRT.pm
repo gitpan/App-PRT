@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use 5.010001;
 
-our $VERSION = "0.06";
+our $VERSION = "0.07";
 
 sub welcome {
     'welcome!!!!';
@@ -16,7 +16,7 @@ __END__
 
 =head1 NAME
 
-App::PRT - Command line Perl Refacoring Tool
+App::PRT - Command line Perl Refactoring Tool
 
 =head1 SYNOPSIS
 
