@@ -14,11 +14,6 @@ sub instantiate : Tests {
 sub collect : Tests {
     my $directory = t::test::prepare_test_code('hello_world');
 
-    subtest 'when no files specified' => sub {
-        my $collector = App::PRT::Collector::Files->new;
-        is_deeply $collector->collect, [];
-    }, 'result is empty';
-
     subtest 'when files specified' => sub {
         my $collector = App::PRT::Collector::Files->new("$directory/hello_world.pl");
         is_deeply $collector->collect, ["$directory/hello_world.pl"];
@@ -43,5 +38,23 @@ sub collect_multi_files: Tests {
 
     my $collector = App::PRT::Collector::Files->new(@$files);
     is_deeply $collector->collect, $files, 'specified files are returned';
+}
 
+sub collect_all_files: Tests {
+    my $directory = t::test::prepare_test_code('contain_ignores');
+
+    my $g = mock_guard 'Cwd' => {
+        getcwd => $directory,
+    };
+
+    my $collector = App::PRT::Collector::Files->new();
+    my $files = [
+        "$directory/app.psgi",
+        "$directory/eg/eg.pl",
+        "$directory/lib/Foo.pm",
+        "$directory/lib/Foo/Bar.pm",
+        "$directory/t/test.t",
+    ];
+
+    cmp_bag $collector->collect, $files, 'all files are returned';
 }

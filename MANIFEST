@@ -20,6 +20,17 @@ t/App-PRT-Command-Help.t
 t/App-PRT-Command-RenameClass.t
 t/App-PRT-Command-ReplaceToken.t
 t/App-PRT.t
+t/data/contain_ignores/_build/Build.pm
+t/data/contain_ignores/app.psgi
+t/data/contain_ignores/blib/Blib.pm
+t/data/contain_ignores/cpanfile
+t/data/contain_ignores/eg/eg.pl
+t/data/contain_ignores/fatlib/Fatlib.pm
+t/data/contain_ignores/lib/Foo.pm
+t/data/contain_ignores/lib/Foo/Bar.pm
+t/data/contain_ignores/local/Local.pm
+t/data/contain_ignores/share/share.pl
+t/data/contain_ignores/t/test.t
 t/data/dinner/dinner.pl
 t/data/dinner/lib/My/Food.pm
 t/data/dinner/lib/My/Human.pm
