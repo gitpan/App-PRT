@@ -69,7 +69,7 @@
    "provides" : {
       "App::PRT" : {
          "file" : "lib/App/PRT.pm",
-         "version" : "0.08"
+         "version" : "0.09"
       },
       "App::PRT::CLI" : {
          "file" : "lib/App/PRT/CLI.pm"
@@ -101,7 +101,7 @@
          "web" : "https://github.com/hitode909/App-PRT"
       }
    },
-   "version" : "0.08",
+   "version" : "0.09",
    "x_contributors" : [
       "Tatsuhiko Miyagawa <miyagawa@bulknews.net>",
       "moznion <moznion@gmail.com>",

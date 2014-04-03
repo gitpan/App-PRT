@@ -36,7 +36,7 @@ no_index:
 provides:
   App::PRT:
     file: lib/App/PRT.pm
-    version: 0.08
+    version: 0.09
   App::PRT::CLI:
     file: lib/App/PRT/CLI.pm
   App::PRT::Collector::Files:
@@ -60,7 +60,7 @@ resources:
   bugtracker: https://github.com/hitode909/App-PRT/issues
   homepage: https://github.com/hitode909/App-PRT
   repository: git://github.com/hitode909/App-PRT.git
-version: 0.08
+version: 0.09
 x_contributors:
   - 'Tatsuhiko Miyagawa <miyagawa@bulknews.net>'
   - 'moznion <moznion@gmail.com>'
