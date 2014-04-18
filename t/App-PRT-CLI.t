@@ -28,24 +28,41 @@ sub parse : Tests {
         ok ! $cli->collector;
     };
 
-    subtest 'when command specified' => sub {
+    subtest 'when command specified, not a git directory' => sub {
+        my $directory = t::test::prepare_test_code('contain_ignores');
+        my $g = mock_guard 'Cwd' => {
+            getcwd => "$directory",
+        };
+
         my $cli = App::PRT::CLI->new;
         $cli->parse(qw{replace_token foo bar});
         cmp_deeply $cli->command, isa('App::PRT::Command::ReplaceToken') & methods(
-            rules => {foo => 'bar'},
+            source_tokens => [ 'foo' ],
+            destination_tokens => [ 'bar' ],
         ), 'ReplaceToken command loaded';
-        ok @{$cli->collector->collect};
-        isa_ok $cli->collector, 'App::PRT::Collector::Files'
+
+        cmp_deeply $cli->collector, isa('App::PRT::Collector::AllFiles') & methods(
+            directory => $directory,
+        );
     };
 
-    subtest 'when source and destination specified' => sub {
+    subtest 'when command specified, git directory' => sub {
+        my $directory = t::test::prepare_test_code('dinner');
+        t::test::prepare_as_git_repository($directory);
+        my $g = mock_guard 'Cwd' => {
+            getcwd => "$directory",
+        };
+
         my $cli = App::PRT::CLI->new;
         $cli->parse(qw{replace_token foo bar});
         cmp_deeply $cli->command, isa('App::PRT::Command::ReplaceToken') & methods(
-            rules => {foo => 'bar'},
-        ), 'ReplaceToken command loaded and foo => bar registered';
-        ok @{$cli->collector->collect};
-        isa_ok $cli->collector, 'App::PRT::Collector::Files'
+            source_tokens => [ 'foo' ],
+            destination_tokens => [ 'bar' ],
+        ), 'ReplaceToken command loaded';
+
+        cmp_deeply $cli->collector, isa('App::PRT::Collector::GitDirectory') & methods(
+            directory => $directory,
+        );
     };
 
     subtest 'when source, destination, target files specified' => sub {
@@ -58,7 +75,8 @@ sub parse : Tests {
             qq{$directory/lib/My/Human.pm}
         );
         cmp_deeply $cli->command, isa('App::PRT::Command::ReplaceToken') & methods(
-            rules => {foo => 'bar'},
+            source_tokens => [ 'foo' ],
+            destination_tokens => [ 'bar' ],
         ), 'ReplaceToken command loaded and foo => bar registered';
         cmp_deeply $cli->collector, isa('App::PRT::Collector::Files') & methods(
             collect => [
@@ -69,12 +87,41 @@ sub parse : Tests {
         ), 'Files collector loaded and files are registered';
     };
 
+    subtest 'when target ' => sub {
+        my $directory = t::test::prepare_test_code('contain_ignores');
+        my $g = mock_guard 'Cwd' => {
+            getcwd => "$directory",
+        };
+
+        my $cli = App::PRT::CLI->new;
+        $cli->parse(qw{replace_token foo bar});
+        cmp_deeply $cli->command, isa('App::PRT::Command::ReplaceToken') & methods(
+            source_tokens => [ 'foo' ],
+            destination_tokens => [ 'bar' ],
+        ), 'ReplaceToken command loaded';
+
+        cmp_deeply $cli->collector, isa('App::PRT::Collector::AllFiles') & methods(
+            directory => $directory,
+        );
+    };
+
+    subtest 'when neither git directory or project root directory detected' => sub {
+        my $directory = t::test::prepare_test_code('hello_world');
+        my $g = mock_guard 'Cwd' => {
+            getcwd => "$directory",
+        };
+        my $cli = App::PRT::CLI->new;
+        like exception {
+            $cli->parse(qw{replace_token foo bar});
+        }, qr/Cannot decide target files/;
+    };
+
     subtest 'when invalid command specified' => sub {
         my $cli = App::PRT::CLI->new;
-        ok exception {
-            $cli->parse('invalid_comand');
-        }, 'died';
-    };
+        like exception {
+            $cli->parse('invalid_command');
+        }, qr/Command invalid_command not found/;
+    }
 }
 
 sub run : Tests {

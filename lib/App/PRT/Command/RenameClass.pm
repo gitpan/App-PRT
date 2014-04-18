@@ -2,7 +2,7 @@ package App::PRT::Command::RenameClass;
 use strict;
 use warnings;
 use PPI;
-use Path::Class;
+use App::PRT::Util::DestinationFile;
 
 sub new {
     my ($class) = @_;
@@ -65,6 +65,9 @@ sub execute {
 
     my $document = PPI::Document->new($file);
 
+    # When parse failed
+    return unless $document;
+
     my $package_statement_renamed = $self->_try_rename_package_statement($document);
 
     $replaced += $self->_try_rename_includes($document);
@@ -76,7 +79,7 @@ sub execute {
     $replaced += $self->_try_rename_tokens($document);
 
     if ($package_statement_renamed) {
-        $document->save($self->_destination_file($file));
+        $document->save(App::PRT::Util::DestinationFile::destination_file($self->source_class_name, $self->destination_class_name, $file));
         unlink($file);
     } else {
         return unless $replaced;
@@ -204,27 +207,6 @@ sub _try_rename_tokens {
     }
 
     $replaced;
-}
-
-sub _destination_file {
-    my ($self, $file) = @_;
-
-    my @delimiters = do {
-        my $pattern = $self->source_class_name;
-        $pattern =~ s{::}{(.+)}g;
-        ($file =~ qr/^(.*)$pattern(.*)$/);
-    };
-    my $prefix = shift @delimiters;
-    my $suffix = pop @delimiters;
-
-    my $fallback_delimiter = $delimiters[-1];
-    my $dir = file($file)->dir;
-    $dir = $dir->parent for grep { $_ eq '/' } @delimiters;
-    my $basename = $self->destination_class_name;
-    $basename =~ s{::}{
-        shift @delimiters // $fallback_delimiter;
-    }ge;
-    $dir->file("$basename$suffix");
 }
 
 1;

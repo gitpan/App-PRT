@@ -48,15 +48,21 @@ sub target_method_name {
     $self->{target_method_name};
 }
 
+sub deleted_code {
+    my ($self) = @_;
+
+    $self->{deleted_code};
+}
+
 # refactor a file
 # argumensts:
 #   $file: filename for refactoring
-# todo:
-#   - normalize new-lines, eg. \n\n\n to \n
 sub execute {
     my ($self, $file) = @_;
 
     my $document = PPI::Document->new($file);
+
+    return unless $document;
 
     my $package = $document->find_first('PPI::Statement::Package');
 
@@ -68,7 +74,28 @@ sub execute {
     my $replaced = 0;
     for my $sub (@$subs) {
         next unless $sub->name eq $self->target_method_name;
-        $sub->remove;
+        my @garbages;
+
+        # comment before method
+        my $cursor = $sub->first_token->previous_token;
+        while (defined $cursor && ref $cursor eq 'PPI::Token::Comment') {
+            unshift @garbages, $cursor;
+            $cursor = $cursor->previous_token;
+        }
+
+        # method body
+        push @garbages, $sub;
+
+        # whitespace after method
+        $cursor = $sub->last_token->next_token;
+        while (defined $cursor && ref $cursor eq 'PPI::Token::Whitespace') {
+            push @garbages, $cursor;
+            $cursor = $cursor->next_token;
+        }
+
+        $self->{deleted_code} = join '', @garbages;
+
+        $_->remove for @garbages;
         $replaced++;
     }
 

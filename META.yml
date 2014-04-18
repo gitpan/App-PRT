@@ -36,19 +36,31 @@ no_index:
 provides:
   App::PRT:
     file: lib/App/PRT.pm
-    version: 0.09
+    version: 0.10
   App::PRT::CLI:
     file: lib/App/PRT/CLI.pm
+  App::PRT::Collector::AllFiles:
+    file: lib/App/PRT/Collector/AllFiles.pm
   App::PRT::Collector::Files:
     file: lib/App/PRT/Collector/Files.pm
+  App::PRT::Collector::GitDirectory:
+    file: lib/App/PRT/Collector/GitDirectory.pm
+  App::PRT::Command::AddMethod:
+    file: lib/App/PRT/Command/AddMethod.pm
+  App::PRT::Command::AddUse:
+    file: lib/App/PRT/Command/AddUse.pm
   App::PRT::Command::DeleteMethod:
     file: lib/App/PRT/Command/DeleteMethod.pm
   App::PRT::Command::Help:
     file: lib/App/PRT/Command/Help.pm
+  App::PRT::Command::MoveClassMethod:
+    file: lib/App/PRT/Command/MoveClassMethod.pm
   App::PRT::Command::RenameClass:
     file: lib/App/PRT/Command/RenameClass.pm
   App::PRT::Command::ReplaceToken:
     file: lib/App/PRT/Command/ReplaceToken.pm
+  App::PRT::Util::DestinationFile:
+    file: lib/App/PRT/Util/DestinationFile.pm
 requires:
   Class::Load: 0
   File::Find::Rule: 0
@@ -60,7 +72,7 @@ resources:
   bugtracker: https://github.com/hitode909/App-PRT/issues
   homepage: https://github.com/hitode909/App-PRT
   repository: git://github.com/hitode909/App-PRT.git
-version: 0.09
+version: 0.10
 x_contributors:
   - 'Tatsuhiko Miyagawa <miyagawa@bulknews.net>'
   - 'moznion <moznion@gmail.com>'
