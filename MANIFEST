@@ -16,6 +16,7 @@ lib/App/PRT/Command/DeleteMethod.pm
 lib/App/PRT/Command/Help.pm
 lib/App/PRT/Command/MoveClassMethod.pm
 lib/App/PRT/Command/RenameClass.pm
+lib/App/PRT/Command/RenameNameSpace.pm
 lib/App/PRT/Command/ReplaceToken.pm
 lib/App/PRT/Util/DestinationFile.pm
 minil.toml
@@ -28,6 +29,7 @@ t/App-PRT-Command-DeleteMethod.t
 t/App-PRT-Command-Help.t
 t/App-PRT-Command-MoveClassMethod.t
 t/App-PRT-Command-RenameClass.t
+t/App-PRT-Command-RenameNameSpace.t
 t/App-PRT-Command-ReplaceToken.t
 t/App-PRT-Util-DestinationFile.t
 t/App-PRT.t
@@ -46,6 +48,7 @@ t/data/contain_ignores/t/test.t
 t/data/dinner/dinner.pl
 t/data/dinner/lib/My/Food.pm
 t/data/dinner/lib/My/Human.pm
+t/data/dinner/lib/Your/Food.pm
 t/data/dinner/t/001-my-food._t
 t/data/dinner/t/My-Food._t
 t/data/greeting/lib/Bye.pm
