@@ -216,6 +216,98 @@ sub execute_for_not_perl_file: Tests {
     ok -f $readme, 'README exists';
 }
 
+sub execute_rename_to_deeper_directory : Tests {
+    my $directory = t::test::prepare_test_code('dinner');
+
+    my $command = App::PRT::Command::RenameClass->new;
+
+    $command->register('My::Food' => 'My::Special::Great::Food');
+
+    subtest 'target class' => sub {
+        my $food_file = "$directory/lib/My/Food.pm";
+        my $special_food_file = "$directory/lib/My/Special/Great/Food.pm";
+
+        is $command->execute($food_file), $special_food_file, 'success';
+
+        ok ! -f $food_file, "Food.pm doesn't exists";
+        ok -e $special_food_file, "Special::Great::Food.pm exists";
+    };
+}
+
+sub execute_rename_package_in_block_statement : Tests {
+    my $directory = t::test::prepare_test_code('package_in_block');
+
+    my $command = App::PRT::Command::RenameClass->new;
+
+    $command->register('Hello' => 'Greeting');
+
+    subtest '{ package } style' => sub {
+        my $script = "$directory/package_in_block.pl";
+
+        is $command->execute($script), $script, 'success';
+
+        ok -e $script, "script exists";
+
+        is file($script)->slurp, <<'CODE', 'package statement replaced';
+use strict;
+use warnings;
+
+{
+    package Greeting;
+
+    sub hello { "hello!" }
+};
+
+print Greeting->hello;
+CODE
+
+    };
+
+    subtest 'package { } style' => sub {
+        my $script = "$directory/package_block_statement.pl";
+
+        is $command->execute($script), $script, 'success';
+
+        ok -e $script, "script exists";
+
+        is file($script)->slurp, <<'CODE', 'package statement replaced';
+use strict;
+use warnings;
+
+package Greeting {
+    sub hello { "hello" }
+};
+
+print Greeting->hello;
+CODE
+
+    };
+
+    subtest 'multi packages' => sub {
+        my $script = "$directory/multi_packages.pl";
+
+        is $command->execute($script), $script, 'success';
+
+        ok -e $script, "script exists";
+
+        is file($script)->slurp, <<'CODE', 'package statement replaced';
+use strict;
+use warnings;
+
+package Bye {
+    sub bye { "bye" }
+};
+
+package Greeting {
+    sub hello { "hello" }
+};
+
+print Greeting->hello;
+CODE
+
+    };
+}
+
 sub parse_arguments : Tests {
     subtest "when source and destination specified" => sub {
         my $command = App::PRT::Command::RenameClass->new;

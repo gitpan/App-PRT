@@ -62,6 +62,9 @@ t/data/hello_world/hello_world.pl
 t/data/inherit/inherit.pl
 t/data/method_call_with_whitespace/hello.pl
 t/data/method_with_comment/FoodWithComment.pm
+t/data/package_in_block/multi_packages.pl
+t/data/package_in_block/package_block_statement.pl
+t/data/package_in_block/package_in_block.pl
 t/data/readme/README.md
 t/test.pm
 t/test.t
