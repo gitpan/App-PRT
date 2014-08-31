@@ -1,5 +1,8 @@
 Revision history for Perl extension App-PRT
 
+0.16 2014-08-31T10:35:30Z
+    - Fix typo, add documentation (thanks syohex)
+
 0.15 2014-08-01T10:16:21Z
     - Version 0.14 was released from wrong branch
 
