@@ -4,7 +4,7 @@
       "This library is free software; you can redistribute it and/or modify"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v0.13.0",
+   "generated_by" : "Minilla/v2.1.1",
    "license" : [
       "perl_5"
    ],
@@ -37,6 +37,7 @@
          "requires" : {
             "Test::CPAN::Meta" : "0",
             "Test::MinimumVersion::Fast" : "0.04",
+            "Test::PAUSE::Permissions" : "0.04",
             "Test::Perl::Critic" : "0",
             "Test::Pod" : "1.41",
             "Test::Spellunker" : "v0.2.7"
@@ -69,7 +70,7 @@
    "provides" : {
       "App::PRT" : {
          "file" : "lib/App/PRT.pm",
-         "version" : "0.17"
+         "version" : "0.18"
       },
       "App::PRT::CLI" : {
          "file" : "lib/App/PRT/CLI.pm"
@@ -98,8 +99,8 @@
       "App::PRT::Command::RenameClass" : {
          "file" : "lib/App/PRT/Command/RenameClass.pm"
       },
-      "App::PRT::Command::RenameNamespace" : {
-         "file" : "lib/App/PRT/Command/RenameNamespace.pm"
+      "App::PRT::Command::RenameNameSpace" : {
+         "file" : "lib/App/PRT/Command/RenameNameSpace.pm"
       },
       "App::PRT::Command::ReplaceToken" : {
          "file" : "lib/App/PRT/Command/ReplaceToken.pm"
@@ -119,7 +120,7 @@
          "web" : "https://github.com/hitode909/App-PRT"
       }
    },
-   "version" : "0.17",
+   "version" : "0.18",
    "x_contributors" : [
       "Tatsuhiko Miyagawa <miyagawa@bulknews.net>",
       "Takanori Ishikawa <takanori.ishikawa@gmail.com>",
