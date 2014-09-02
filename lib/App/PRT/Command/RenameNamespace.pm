@@ -1,4 +1,4 @@
-package App::PRT::Command::RenameNameSpace;
+package App::PRT::Command::RenameNamespace;
 use strict;
 use warnings;
 use PPI;
@@ -11,8 +11,6 @@ sub new {
         target_hname_space => undef,
     }, $class;
 }
-
-sub handle_files { 1 }
 
 # parse arguments from CLI
 # arguments:

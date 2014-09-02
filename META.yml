@@ -36,7 +36,7 @@ no_index:
 provides:
   App::PRT:
     file: lib/App/PRT.pm
-    version: 0.16
+    version: 0.17
   App::PRT::CLI:
     file: lib/App/PRT/CLI.pm
     version: 0
@@ -58,17 +58,14 @@ provides:
   App::PRT::Command::DeleteMethod:
     file: lib/App/PRT/Command/DeleteMethod.pm
     version: 0
-  App::PRT::Command::Help:
-    file: lib/App/PRT/Command/Help.pm
-    version: 0
   App::PRT::Command::MoveClassMethod:
     file: lib/App/PRT/Command/MoveClassMethod.pm
     version: 0
   App::PRT::Command::RenameClass:
     file: lib/App/PRT/Command/RenameClass.pm
     version: 0
-  App::PRT::Command::RenameNameSpace:
-    file: lib/App/PRT/Command/RenameNameSpace.pm
+  App::PRT::Command::RenameNamespace:
+    file: lib/App/PRT/Command/RenameNamespace.pm
     version: 0
   App::PRT::Command::ReplaceToken:
     file: lib/App/PRT/Command/ReplaceToken.pm
@@ -87,7 +84,7 @@ resources:
   bugtracker: https://github.com/hitode909/App-PRT/issues
   homepage: https://github.com/hitode909/App-PRT
   repository: git://github.com/hitode909/App-PRT.git
-version: 0.16
+version: 0.17
 x_contributors:
   - 'Tatsuhiko Miyagawa <miyagawa@bulknews.net>'
   - 'Takanori Ishikawa <takanori.ishikawa@gmail.com>'

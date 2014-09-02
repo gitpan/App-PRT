@@ -13,10 +13,9 @@ lib/App/PRT/Collector/GitDirectory.pm
 lib/App/PRT/Command/AddMethod.pm
 lib/App/PRT/Command/AddUse.pm
 lib/App/PRT/Command/DeleteMethod.pm
-lib/App/PRT/Command/Help.pm
 lib/App/PRT/Command/MoveClassMethod.pm
 lib/App/PRT/Command/RenameClass.pm
-lib/App/PRT/Command/RenameNameSpace.pm
+lib/App/PRT/Command/RenameNamespace.pm
 lib/App/PRT/Command/ReplaceToken.pm
 lib/App/PRT/Util/DestinationFile.pm
 minil.toml
@@ -26,10 +25,9 @@ t/App-PRT-Collector-Files.t
 t/App-PRT-Command-AddMethod.t
 t/App-PRT-Command-AddUse.t
 t/App-PRT-Command-DeleteMethod.t
-t/App-PRT-Command-Help.t
 t/App-PRT-Command-MoveClassMethod.t
 t/App-PRT-Command-RenameClass.t
-t/App-PRT-Command-RenameNameSpace.t
+t/App-PRT-Command-RenameNamespace.t
 t/App-PRT-Command-ReplaceToken.t
 t/App-PRT-Util-DestinationFile.t
 t/App-PRT.t
