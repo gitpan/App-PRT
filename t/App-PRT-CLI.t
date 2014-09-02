@@ -18,6 +18,10 @@ sub _command_name_to_command_class : Tests {
 
     is $cli->_command_name_to_command_class('hello'), 'App::PRT::Command::Hello', 'ucfirst';
     is $cli->_command_name_to_command_class('replace_token'), 'App::PRT::Command::ReplaceToken', 'separate by _';
+
+    subtest 'alias' => sub {
+        is $cli->_command_name_to_command_class('rename_namespace'), 'App::PRT::Command::RenameNameSpace', 'rename_namespace is alias for rename_name_space. Namespace is not name space';
+    };
 }
 
 sub parse : Tests {
@@ -148,7 +152,7 @@ sub run : Tests {
         my $directory = t::test::prepare_test_code('dinner');
 
         my $cli = App::PRT::CLI->new;
-        $cli->parse(qw(rename_name_space My Our), "$directory/lib/My/Food.pm", "$directory/lib/My/Human.pm");
+        $cli->parse(qw(rename_namespace My Our), "$directory/lib/My/Food.pm", "$directory/lib/My/Human.pm");
 
         my $files;
         my $g = mock_guard 'App::PRT::Command::RenameNameSpace' => {
